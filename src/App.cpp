@@ -180,6 +180,7 @@ void App::onRenderGraphicsContext(const VRGraphicsState &renderState) {
 		initializeText();
     
         earth.reset(new Earth());
+        sun.reset(new Sun());
  
     }
     
@@ -226,14 +227,7 @@ void App::onRenderGraphicsScene(const VRGraphicsState &renderState) {
     // Draw the earth
     earth->draw(_shader);
     
-    // Draw earthquakes
-    int start = eqd.getIndexByDate(Date(currentTime - PLAYBACK_WINDOW));
-    int end = eqd.getIndexByDate(Date(currentTime));
-    for (int x=start; x<end; x++) {
-        Earthquake e = eqd.getByIndex(x);
-        // TODO: Draw earthquake e
-        
-        
+    sun->draw(_shader);
         
         
     }

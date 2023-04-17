@@ -78,6 +78,9 @@ private:
     // Object representing the earth
     std::shared_ptr<Earth> earth;
     
+    // Object representing the sun
+    std::shared_ptr<Earth> sun;
+    
     // Rotation matrix for the earth and displayed earthquakes
     glm::mat4 rotation;
     
