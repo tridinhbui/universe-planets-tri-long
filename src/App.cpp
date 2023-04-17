@@ -232,17 +232,9 @@ void App::onRenderGraphicsScene(const VRGraphicsState &renderState) {
         
     }
     
-    Date d(currentTime);
-    stringstream s;
-    s << "Current date: " << d.getMonth()
-    << "/" << d.getDay()
-    << "/" << d.getYear()
-    << "  " << d.getHour()
-    << ":" << d.getMinute();
-    const std::string text = s.str();
-    drawText(text, 20, 20, windowHeight, windowWidth);
 
-}
+
+
 
 void App::drawText(const std::string text, float xPos, float yPos, GLfloat windowHeight, GLfloat windowWidth) {
 	//float lh = 0;

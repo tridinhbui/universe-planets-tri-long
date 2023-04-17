@@ -32,6 +32,7 @@ using namespace MinVR;
 #include <BasicGraphics.h>
 #include "EarthquakeDatabase.h"
 #include "Earth.h"
+#include "Sun.h"
 #include "Config.h"
 
 #include <iostream>
@@ -79,7 +80,7 @@ private:
     std::shared_ptr<Earth> earth;
     
     // Object representing the sun
-    std::shared_ptr<Earth> sun;
+    std::shared_ptr<Sun> sun;
     
     // Rotation matrix for the earth and displayed earthquakes
     glm::mat4 rotation;
