@@ -40,6 +40,10 @@ set(source_files
   src/Date.cpp
   src/Earthquake.cpp
   src/EarthquakeDatabase.cpp
+  src/Sun.cpp
+  src/Venus.cpp
+  src/Saturn.cpp
+  src/Mars.cpp
 )
 
 set(header_files
@@ -49,6 +53,10 @@ set(header_files
   src/config.h
   src/Earthquake.h
   src/EarthquakeDatabase.h
+  src/Sun.h
+  src/Venus.h
+  src/Saturn.h
+  src/Mars.h
 )
 
 set(extra_files
