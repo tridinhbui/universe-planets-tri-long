@@ -35,8 +35,8 @@ void Earth::setupGeometry() {
         for (int j = 0; j <= SLICES; j++,k1++,k2++) {
             theta = j * sectorStep;
             Mesh::Vertex vert;
-            vert.position = vec3(cos(phi)*sin(theta),sin(phi),cos(phi)*cos(theta));
-            vert.normal = vec3(cos(phi)*sin(theta),sin(phi),cos(phi)*cos(theta));
+            vert.position = vec3(3*cos(phi)*sin(theta)+3,3*sin(phi)+2,3*cos(phi)*cos(theta));
+            vert.normal = vec3(3*cos(phi)*sin(theta)+3,3*sin(phi)+2,3*cos(phi)*cos(theta));
             vert.texCoord0 = glm::vec2(float(j)/SLICES,float(i)/STACKS);
             cpuVertexArray.push_back(vert);
             //if(i != 0){

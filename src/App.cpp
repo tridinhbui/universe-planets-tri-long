@@ -20,7 +20,8 @@ App::App(int argc, char** argv) : VRApp(argc, argv)
 	_lastTime = 0.0;
     _curFrameTime = 0.0;
     
-    eye_world = glm::vec3(0, 0, 4);
+    eye_world = glm::vec3(3, 0, 6);
+    look_at = glm::vec3(0,0,0);
     mouseDown = false;
     
     // Check that the config.h paths exist
@@ -81,21 +82,21 @@ void App::onButtonDown(const VRButtonEvent &event) {
     
     // Speedup or slowdown the playback
     if (name == "KbdLeft_Down") {
-        playbackScale /= 1.3;
+        look_at = look_at + vec3(-0.5,0,0);
     }
     if (name == "KbdRight_Down") {
-        playbackScale *= 1.3;
+        look_at = look_at  + vec3(0.5,0,0);
     }
     
     // Dolly the camera closer or farther away from the earth
     if (name == "KbdUp_Down") {
-        vec3 newCamPos = eye_world + vec3(0,0,-0.01);
+        vec3 newCamPos = eye_world + vec3(0,0,-0.5);
         if (newCamPos.z > 1.2) {
             eye_world = newCamPos;
         }
     }
     else if (name == "KbdDown_Down") {
-        vec3 newCamPos = eye_world + vec3(0,0,0.01);
+        vec3 newCamPos = eye_world + vec3(0,0,0.5);
         eye_world = newCamPos;
     }
     
@@ -181,6 +182,9 @@ void App::onRenderGraphicsContext(const VRGraphicsState &renderState) {
     
         earth.reset(new Earth());
         sun.reset(new Sun());
+        // mars.reset(new Mars());
+        // venus.reset(new Venus());
+        // saturn.reset(new Saturn());
  
     }
     
@@ -203,7 +207,7 @@ void App::onRenderGraphicsScene(const VRGraphicsState &renderState) {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
 	// Setup the view matrix to set where the camera is located in the scene
-    glm::mat4 view = glm::lookAt(eye_world, glm::vec3(0,0,0), glm::vec3(0,1,0));
+    glm::mat4 view = glm::lookAt(eye_world, look_at, glm::vec3(0,1,0));
 
 	// Setup the projection matrix so that things are rendered in perspective
 	GLfloat windowHeight = renderState.index().getValue("FramebufferHeight");

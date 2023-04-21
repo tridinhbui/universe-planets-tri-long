@@ -1,5 +1,5 @@
-#ifndef Sun_h
-#define Sun_h
+#ifndef Saturn_h
+#define Saturn_h
 
 #include <GLSLProgram.h>
 #include "Config.h"
@@ -9,10 +9,10 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/constants.hpp>
 
-class Sun {
+class Saturn {
 public:
-  Sun();
-    ~Sun(){};
+  Saturn();
+    ~Saturn(){};
   
   // Given latitude and longitude, calculate 3D position
     glm::vec3 getPosition(double latitude, double longitude);
