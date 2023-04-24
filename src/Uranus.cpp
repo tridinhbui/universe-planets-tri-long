@@ -1,10 +1,10 @@
-#include "Jupiter.h"
+#include "Uranus.h"
 
 using namespace std;
 using namespace glm;
 using namespace basicgraphics;
 
-Jupiter::Jupiter() {
+Uranus::Uranus() {
 
     // Note: TEXTURE_PATH is set in config.h
     shared_ptr<Texture> tex = Texture::create2DTextureFromFile(TEXTURE_PATH);
@@ -19,7 +19,7 @@ Jupiter::Jupiter() {
 	setupGeometry();
 }
 
-void Jupiter::setupGeometry() {
+void Uranus::setupGeometry() {
     const int STACKS = 20;
     const int SLICES = 40;
     float sectorStep = 2 * glm::pi<float>()/SLICES;
@@ -63,18 +63,11 @@ void Jupiter::setupGeometry() {
     
 }
 
-glm::vec3 Jupiter::getPosition(double latitude, double longitude) {
-    latitude = radians(latitude);
-    longitude = radians(longitude);
-    float x = cos(longitude) * cos(latitude);
-    float y = sin(latitude);
-    float z = sin(longitude) * cos(latitude);
-    
-    return vec3(x,y,z); 
+glm::vec3 Uranus::getPosition(double latitude, double longitude) {
+    return vec3(10.0f, 5.0f, 3.0f);
 }
 
-
-void Jupiter::draw(GLSLProgram &shader) {
+void Uranus::draw(GLSLProgram &shader) {
 
 	_mesh->draw(shader);
 
