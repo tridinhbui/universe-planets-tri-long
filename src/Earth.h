@@ -26,10 +26,16 @@ public:
     std::unique_ptr<basicgraphics::Mesh> _mesh;
     std::vector<basicgraphics::Mesh::Vertex> cpuVertexArray;
     std::vector<int> cpuIndexArray;
+
 protected:
-  
   // Stores the earth texture data
     std::vector< std::shared_ptr<basicgraphics::Texture> > textures;
+
+    // radius and center
+    float radius;
+    float centerX;
+    float centerY;
+    float centerZ;
     
 
 };

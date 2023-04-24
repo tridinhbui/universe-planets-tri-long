@@ -5,6 +5,10 @@ using namespace glm;
 using namespace basicgraphics;
 
 Earth::Earth() {
+    radius = 3.0f;
+    centerX = 3.0f;
+    centerY = 2.0f;
+    centerZ = 0.0f;
 
     // Note: TEXTURE_PATH is set in config.h
     shared_ptr<Texture> tex = Texture::create2DTextureFromFile(TEXTURE_PATH);
@@ -35,8 +39,8 @@ void Earth::setupGeometry() {
         for (int j = 0; j <= SLICES; j++,k1++,k2++) {
             theta = j * sectorStep;
             Mesh::Vertex vert;
-            vert.position = vec3(3*cos(phi)*sin(theta)+3,3*sin(phi)+2,3*cos(phi)*cos(theta));
-            vert.normal = vec3(3*cos(phi)*sin(theta)+3,3*sin(phi)+2,3*cos(phi)*cos(theta));
+            vert.position = vec3(radius*cos(phi)*sin(theta)+centerX,radius*sin(phi)+centerY,radius*cos(phi)*cos(theta)+centerZ );
+            vert.normal = vec3(radius * cos(phi) * sin(theta) + centerX, radius * sin(phi) + centerY, radius * cos(phi) * cos(theta) + centerZ);
             vert.texCoord0 = glm::vec2(float(j)/SLICES,float(i)/STACKS);
             cpuVertexArray.push_back(vert);
             //if(i != 0){

@@ -45,7 +45,6 @@ set(source_files
   src/Saturn.cpp
   src/Mars.cpp
   src/Jupiter.cpp
-  src/Neptune.cpp
   src/Mercury.cpp
 )
 
@@ -61,7 +60,6 @@ set(header_files
   src/Saturn.h
   src/Mars.h
   src/Jupiter.h
-  src/Neptune.h
   src/Mercury.h
 )
 
