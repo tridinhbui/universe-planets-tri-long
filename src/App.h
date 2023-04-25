@@ -36,6 +36,7 @@ using namespace MinVR;
 #include "Mars.h"
 #include "Venus.h"
 #include "Saturn.h"
+#include "Planet.h"
 #include "Config.h"
 
 #include <iostream>
@@ -90,6 +91,9 @@ private:
 
     // Object representing the earth
     std::shared_ptr<Mars> mars;
+
+    // Object representing the planet0
+    std::shared_ptr<Planet> planet0;
 
     // Rotation matrix for the earth and displayed earthquakes
     glm::mat4 rotation;

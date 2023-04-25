@@ -8,6 +8,7 @@
 #include <config/VRDataIndex.h>
 
 #include <glm/gtx/orthonormalize.hpp>
+#include <string>
 
 using namespace basicgraphics;
 using namespace std;
@@ -180,11 +181,12 @@ void App::onRenderGraphicsContext(const VRGraphicsState &renderState) {
 
 		initializeText();
     
-        earth.reset(new Earth());
-        sun.reset(new Sun());
+        // earth.reset(new Earth());
+        // sun.reset(new Sun());
         // mars.reset(new Mars());
         // venus.reset(new Venus());
         // saturn.reset(new Saturn());
+        planet0.reset(new Planet(0.0f, 0.0f, 0.0f, 2.0f, "earth"));
  
     }
     
@@ -229,9 +231,10 @@ void App::onRenderGraphicsScene(const VRGraphicsState &renderState) {
     
     
     // Draw the earth
-    earth->draw(_shader);
+    // earth->draw(_shader);
     
-    sun->draw(_shader);
+    // sun->draw(_shader);
+    planet0->draw(_shader);
         
         
     }

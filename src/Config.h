@@ -18,7 +18,7 @@ const std::string DATA_DIR = "C:\\Users\\Long Truong\\Documents\\Comp465\\univer
 
 
 // The file to load for the earth texture.
-const std::string TEXTURE_PATH = DATA_DIR + "earth-2k.jpg";
+ const std::string TEXTURE_PATH = DATA_DIR + "earth-2k.jpg";
 
 // The earthquake database file
 const std::string DATA_PATH = DATA_DIR + "earthquakes.txt";

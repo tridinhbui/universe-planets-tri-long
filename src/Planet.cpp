@@ -1,18 +1,23 @@
-#include "Earth.h"
+#include "Planet.h"
 
 using namespace std;
 using namespace glm;
 using namespace basicgraphics;
+#include <unordered_map>;
 
-Earth::Earth() {
-    // initialize data
-    radius = 3.0f;
-    centerX = 3.0f;
-    centerY = 2.0f;
-    centerZ = 0.0f;
+Planet::Planet(float centerX, float centerY, float centerZ, float radius, string planetName) {
+    // Set member variables
+    this->radius = radius;
+    this->centerX = centerX;
+    this->centerY = centerY;
+    this->centerZ = centerZ;
+    this->planetName = planetName;
 
+    unordered_map<string, string> umap;
+    umap["earth"] = "earth-2k.jpg";
+    string path = "C:\\Users\\Long Truong\\Documents\\Comp465\\universe-planets-tri-long\\data\\data\\";
     // Note: TEXTURE_PATH is set in config.h
-    shared_ptr<Texture> tex = Texture::create2DTextureFromFile(TEXTURE_PATH);
+    shared_ptr<Texture> tex = Texture::create2DTextureFromFile(path + umap[planetName]);
     tex->setTexParameteri(GL_TEXTURE_WRAP_S, GL_REPEAT);
     tex->setTexParameteri(GL_TEXTURE_WRAP_T, GL_REPEAT);
     tex->setTexParameteri(GL_TEXTURE_MIN_FILTER, GL_LINEAR);
@@ -24,7 +29,7 @@ Earth::Earth() {
 	setupGeometry();
 }
 
-void Earth::setupGeometry() {
+void Planet::setupGeometry() {
     const int STACKS = 20;
     const int SLICES = 40;
     float sectorStep = 2 * glm::pi<float>()/SLICES;
@@ -40,7 +45,7 @@ void Earth::setupGeometry() {
         for (int j = 0; j <= SLICES; j++,k1++,k2++) {
             theta = j * sectorStep;
             Mesh::Vertex vert;
-            vert.position = vec3(radius*cos(phi)*sin(theta)+centerX,radius*sin(phi)+centerY,radius*cos(phi)*cos(theta)+centerZ );
+            vert.position = vec3(radius * cos(phi) * sin(theta) + centerX, radius * sin(phi) + centerY, radius * cos(phi) * cos(theta) + centerZ);
             vert.normal = vec3(radius * cos(phi) * sin(theta) + centerX, radius * sin(phi) + centerY, radius * cos(phi) * cos(theta) + centerZ);
             vert.texCoord0 = glm::vec2(float(j)/SLICES,float(i)/STACKS);
             cpuVertexArray.push_back(vert);
@@ -68,7 +73,7 @@ void Earth::setupGeometry() {
     
 }
 
-glm::vec3 Earth::getPosition(double latitude, double longitude) {
+glm::vec3 Planet::getPosition(double latitude, double longitude) {
     latitude = radians(latitude);
     longitude = radians(longitude);
     float x = cos(longitude) * cos(latitude);
@@ -79,7 +84,7 @@ glm::vec3 Earth::getPosition(double latitude, double longitude) {
 }
 
 
-void Earth::draw(GLSLProgram &shader) {
+void Planet::draw(GLSLProgram &shader) {
 
 	_mesh->draw(shader);
 
