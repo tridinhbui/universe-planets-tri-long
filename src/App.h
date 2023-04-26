@@ -32,10 +32,6 @@ using namespace MinVR;
 #include <BasicGraphics.h>
 #include "EarthquakeDatabase.h"
 #include "Earth.h"
-#include "Sun.h"
-#include "Mars.h"
-#include "Venus.h"
-#include "Saturn.h"
 #include "Planet.h"
 #include "Config.h"
 
@@ -79,18 +75,6 @@ private:
 
     // Object representing the earth
     std::shared_ptr<Earth> earth;
-
-    // Object representing the sun
-    std::shared_ptr<Sun> sun;
-
-    // Object representing the venus
-    std::shared_ptr<Venus> venus;
-
-    // Object representing the saturn
-    std::shared_ptr<Saturn> saturn;
-
-    // Object representing the earth
-    std::shared_ptr<Mars> mars;
 
     // Object representing the planet0
     std::shared_ptr<Planet> planet0;

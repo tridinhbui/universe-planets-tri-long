@@ -40,12 +40,6 @@ set(source_files
   src/Date.cpp
   src/Earthquake.cpp
   src/EarthquakeDatabase.cpp
-  src/Sun.cpp
-  src/Venus.cpp
-  src/Saturn.cpp
-  src/Mars.cpp
-  src/Jupiter.cpp
-  src/Mercury.cpp
   src/Planet.cpp
 )
 
@@ -56,12 +50,6 @@ set(header_files
   src/config.h
   src/Earthquake.h
   src/EarthquakeDatabase.h
-  src/Sun.h
-  src/Venus.h
-  src/Saturn.h
-  src/Mars.h
-  src/Jupiter.h
-  src/Mercury.h
   src/Planet.h
 )
 

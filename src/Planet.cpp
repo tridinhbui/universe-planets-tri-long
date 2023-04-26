@@ -15,9 +15,8 @@ Planet::Planet(float centerX, float centerY, float centerZ, float radius, string
 
     unordered_map<string, string> umap;
     umap["earth"] = "earth-2k.jpg";
-    string path = "C:\\Users\\Long Truong\\Documents\\Comp465\\universe-planets-tri-long\\data\\data\\";
     // Note: TEXTURE_PATH is set in config.h
-    shared_ptr<Texture> tex = Texture::create2DTextureFromFile(path + umap[planetName]);
+    shared_ptr<Texture> tex = Texture::create2DTextureFromFile(DATA_DIR + umap[planetName]);
     tex->setTexParameteri(GL_TEXTURE_WRAP_S, GL_REPEAT);
     tex->setTexParameteri(GL_TEXTURE_WRAP_T, GL_REPEAT);
     tex->setTexParameteri(GL_TEXTURE_MIN_FILTER, GL_LINEAR);
