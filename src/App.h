@@ -74,11 +74,21 @@ private:
     EarthquakeDatabase eqd;
 
     // Object representing the earth
-    std::shared_ptr<Earth> earth;
+
 
     // Object representing the planet0
-    std::shared_ptr<Planet> planet0;
-
+    std::shared_ptr<Planet> saturn;
+    std::shared_ptr<Planet> sun;
+    std::shared_ptr<Planet> earth;
+    std::shared_ptr<Planet> mercury;
+    std::shared_ptr<Planet> venus;
+    std::shared_ptr<Planet> moon;
+    std::shared_ptr<Planet> mars;
+    std::shared_ptr<Planet> jupiter;
+    std::shared_ptr<Planet> uranus;
+    std::shared_ptr<Planet> neptune;
+    std::shared_ptr<Planet> pluto;
+    
     // Rotation matrix for the earth and displayed earthquakes
     glm::mat4 rotation;
 

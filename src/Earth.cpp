@@ -12,7 +12,7 @@ Earth::Earth() {
     centerZ = 0.0f;
 
     // Note: TEXTURE_PATH is set in config.h
-    shared_ptr<Texture> tex = Texture::create2DTextureFromFile(TEXTURE_PATH);
+    shared_ptr<Texture> tex = Texture::create2DTextureFromFile(EARTH_PATH);
     tex->setTexParameteri(GL_TEXTURE_WRAP_S, GL_REPEAT);
     tex->setTexParameteri(GL_TEXTURE_WRAP_T, GL_REPEAT);
     tex->setTexParameteri(GL_TEXTURE_MIN_FILTER, GL_LINEAR);

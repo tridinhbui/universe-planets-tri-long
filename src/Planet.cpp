@@ -14,9 +14,20 @@ Planet::Planet(float centerX, float centerY, float centerZ, float radius, string
     this->planetName = planetName;
 
     unordered_map<string, string> umap;
-    umap["earth"] = "earth-2k.jpg";
+    umap["earth"] = EARTH_PATH;
+    umap["venus"] = VENUS_PATH;
+    umap["pluto"] = PLUTO_PATH;
+    umap["mercury"] = MERCURY_PATH;
+    umap["sun"] = SUN_PATH;
+    umap["moon"] = MOON_PATH;
+    umap["mars"] = MARS_PATH;
+    umap["saturn"] = SATURN_PATH;
+    umap["uranus"] = URANUS_PATH;
+    umap["neptune"] = NEPTUNE_PATH;
+    umap["jupiter"] = JUPITER_PATH;
+    
     // Note: TEXTURE_PATH is set in config.h
-    shared_ptr<Texture> tex = Texture::create2DTextureFromFile(DATA_DIR + umap[planetName]);
+    shared_ptr<Texture> tex = Texture::create2DTextureFromFile(umap[planetName]);
     tex->setTexParameteri(GL_TEXTURE_WRAP_S, GL_REPEAT);
     tex->setTexParameteri(GL_TEXTURE_WRAP_T, GL_REPEAT);
     tex->setTexParameteri(GL_TEXTURE_MIN_FILTER, GL_LINEAR);

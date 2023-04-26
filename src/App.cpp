@@ -26,9 +26,41 @@ App::App(int argc, char** argv) : VRApp(argc, argv)
     mouseDown = false;
     
     // Check that the config.h paths exist
-    std::ifstream infile(TEXTURE_PATH);
+    std::ifstream infile(EARTH_PATH);
     if (!infile.good()) {
-        std::cout<< "ERROR: Unable to load the TEXTURE_PATH: \n\t"<< TEXTURE_PATH<<std::endl;
+        std::cout<< "ERROR: Unable to load the EARTH_PATH: \n\t"<< EARTH_PATH<<std::endl;
+        std::cout << "\t Check that the path exists and modify config.h if needed"<<std::endl;
+        assert(false);
+    }
+    else {
+        infile.close();
+    }
+        if (!infile.good()) {
+        std::cout<< "ERROR: Unable to load the VENUS_PATH: \n\t"<< VENUS_PATH<<std::endl;
+        std::cout << "\t Check that the path exists and modify config.h if needed"<<std::endl;
+        assert(false);
+    }
+    else {
+        infile.close();
+    }
+        if (!infile.good()) {
+        std::cout<< "ERROR: Unable to load the PLUTO_PATH: \n\t"<< PLUTO_PATH<<std::endl;
+        std::cout << "\t Check that the path exists and modify config.h if needed"<<std::endl;
+        assert(false);
+    }
+    else {
+        infile.close();
+    }
+        if (!infile.good()) {
+        std::cout<< "ERROR: Unable to load the MOON_PATH: \n\t"<< MOON_PATH<<std::endl;
+        std::cout << "\t Check that the path exists and modify config.h if needed"<<std::endl;
+        assert(false);
+    }
+    else {
+        infile.close();
+    }
+        if (!infile.good()) {
+        std::cout<< "ERROR: Unable to load the SATURN_PATH: \n\t"<< SATURN_PATH<<std::endl;
         std::cout << "\t Check that the path exists and modify config.h if needed"<<std::endl;
         assert(false);
     }
@@ -181,12 +213,22 @@ void App::onRenderGraphicsContext(const VRGraphicsState &renderState) {
 
 		initializeText();
     
-        // earth.reset(new Earth());
-        // sun.reset(new Sun());
-        // mars.reset(new Mars());
-        // venus.reset(new Venus());
-        // saturn.reset(new Saturn());
-        planet0.reset(new Planet(0.0f, 0.0f, 0.0f, 2.0f, "earth"));
+        
+        // Create planet objects
+        sun.reset(new Planet(0.0f, 0.0f, 0.0f, 2.0f, "sun"));
+        mercury.reset(new Planet(1.158f, 0.0f, -0.2f, 0.2f, "mercury"));
+        venus.reset(new Planet(2.164f, 0.0f, -0.4f, 0.5f, "venus"));
+        earth.reset(new Planet(2.992f, 0.0f, -0.6f, 0.6f, "earth"));
+        moon.reset(new Planet(0.0f, 0.00768f, -0.01f, 0.2f, "moon"));
+        mars.reset(new Planet(4.56f, 0.0f, -0.8f, 0.4f, "mars"));
+        jupiter.reset(new Planet(15.57f, 0.0f, -1.0f, 1.5f, "jupiter"));
+        saturn.reset(new Planet(28.64f, 0.0f, -1.2f, 1.3f, "saturn"));
+        uranus.reset(new Planet(57.34f, 0.0f, -1.4f, 1.1f, "uranus"));
+        neptune.reset(new Planet(90.3f, 0.0f, -1.6f, 1.2f, "neptune"));
+        pluto.reset(new Planet(118.13f, 0.0f, -1.8f, 0.2f, "pluto"));
+
+
+        
  
     }
     
@@ -234,8 +276,17 @@ void App::onRenderGraphicsScene(const VRGraphicsState &renderState) {
     // earth->draw(_shader);
     
     // sun->draw(_shader);
-    planet0->draw(_shader);
-        
+    sun->draw(_shader);
+    earth->draw(_shader);
+    saturn->draw(_shader);
+    venus->draw(_shader);
+    mercury->draw(_shader);
+    moon->draw(_shader);
+    mars->draw(_shader);
+    jupiter->draw(_shader);
+    uranus->draw(_shader);
+    neptune->draw(_shader);
+    pluto->draw(_shader);
         
     }
     
