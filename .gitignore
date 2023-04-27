@@ -1,6 +1,4 @@
-# data files
-data*/
-*.jpg
+
 *earthquakes.txt
 *sources.txt
 
