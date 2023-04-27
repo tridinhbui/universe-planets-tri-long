@@ -35,38 +35,9 @@ App::App(int argc, char** argv) : VRApp(argc, argv)
     else {
         infile.close();
     }
-        if (!infile.good()) {
-        std::cout<< "ERROR: Unable to load the VENUS_PATH: \n\t"<< VENUS_PATH<<std::endl;
-        std::cout << "\t Check that the path exists and modify config.h if needed"<<std::endl;
-        assert(false);
-    }
-    else {
-        infile.close();
-    }
-        if (!infile.good()) {
-        std::cout<< "ERROR: Unable to load the PLUTO_PATH: \n\t"<< PLUTO_PATH<<std::endl;
-        std::cout << "\t Check that the path exists and modify config.h if needed"<<std::endl;
-        assert(false);
-    }
-    else {
-        infile.close();
-    }
-        if (!infile.good()) {
-        std::cout<< "ERROR: Unable to load the MOON_PATH: \n\t"<< MOON_PATH<<std::endl;
-        std::cout << "\t Check that the path exists and modify config.h if needed"<<std::endl;
-        assert(false);
-    }
-    else {
-        infile.close();
-    }
-        if (!infile.good()) {
-        std::cout<< "ERROR: Unable to load the SATURN_PATH: \n\t"<< SATURN_PATH<<std::endl;
-        std::cout << "\t Check that the path exists and modify config.h if needed"<<std::endl;
-        assert(false);
-    }
-    else {
-        infile.close();
-    }
+
+  
+        
     std::ifstream infile2(DATA_PATH);
     if (!infile2.good()) {
         std::cout<< "ERROR: Unable to load the DATA_PATH: \n\t"<< DATA_PATH<<std::endl;
