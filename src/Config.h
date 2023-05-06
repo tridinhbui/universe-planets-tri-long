@@ -8,14 +8,14 @@
 // paths simpler.
 
 // WINDOWS Path:
-// const std::string DATA_DIR = "C:\\Users\\Long Truong\\Documents\\Comp465\\universe-planets-tri-long\\data\\";
-// const std::string DATA_DIR_EQ = "C:\\Users\\Long Truong\\Documents\\Comp465\\universe-planets-tri-long\\data\\data\\";
+const std::string DATA_DIR = "C:\\Users\\Long Truong\\Documents\\Comp465\\universe-planets-tri-long\\data\\";
+const std::string DATA_DIR_EQ = "C:\\Users\\Long Truong\\Documents\\Comp465\\universe-planets-tri-long\\data\\data\\";
 
 
 // MAC path
 
-const std::string DATA_DIR = "/Users/buidinhtri/Desktop/COMP465/universe-planets-tri-long/data/";
-const std::string DATA_DIR_EQ = DATA_DIR;
+// const std::string DATA_DIR = "/Users/buidinhtri/Desktop/COMP465/universe-planets-tri-long/data/";
+// const std::string DATA_DIR_EQ = DATA_DIR;
 
 
 // The file to load for the earth texture.

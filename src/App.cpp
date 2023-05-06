@@ -21,7 +21,7 @@ App::App(int argc, char **argv) : VRApp(argc, argv)
     _lastTime = 0.0;
     _curFrameTime = 0.0;
 
-    eye_world = glm::vec3(3, 0, 6);
+    eye_world = glm::vec3(10, 4, 10);
     look_at = glm::vec3(0, 0, 0);
     mouseDown = false;
 
@@ -142,10 +142,7 @@ void App::onCursorMove(const VRCursorEvent &event)
 
         if (length(dxy) != 0)
         {
-            float scalingAngleVariable = 1 / 180.0f;
-            // rotation = toMat4(angleAxis(radians(45.0f/360.0f), vectorAxis)) * rotation;
-
-            eye_world = eye_world + vec3(0, dxy.y * 0.2f, 0);
+            eye_world = eye_world + vec3(dxy.x*0.2f, dxy.y * 0.2f, dxy.x * -0.2f);
         }
     }
     lastMousePos = vec2(event.getPos()[0], event.getPos()[1]);
@@ -192,7 +189,6 @@ void App::onRenderGraphicsContext(const VRGraphicsState &renderState)
 
         // Create planet objects
         sun.reset(new Planet(0.0f, 0.0f, 0.0f, 2.0f, "sun"));
-        planet0.reset(new Planet(0.0f, 0.0f, 0.0f, 2.0f, "earth"));
         mercury.reset(new Planet(1.158f, 0.0f, -0.2f, 0.2f, "mercury"));
         venus.reset(new Planet(2.164f, 0.0f, -0.4f, 0.5f, "venus"));
         earth.reset(new Planet(2.992f, 0.0f, -0.6f, 0.6f, "earth"));
@@ -251,7 +247,8 @@ void App::onRenderGraphicsContext(const VRGraphicsState &renderState)
 
 vec3 App::updatePlanetPositions(float currentTime, float orbitRadius, float orbitPeriod)
 {
-    float orbitAngle = glm::radians(360.0f * (currentTime / (orbitPeriod * 86400.0f)));
+    const float scalingVar = 2.0f;
+    float orbitAngle = scalingVar * glm::radians(360.0f * (currentTime / (orbitPeriod * 86400.0f)));
 
     glm::vec3 positions = glm::vec3(orbitRadius * cos(orbitAngle), 0, orbitRadius * sin(orbitAngle));
     return positions;
@@ -294,7 +291,7 @@ void App::onRenderGraphicsScene(const VRGraphicsState &renderState)
     mat4 newModel = translation * model;
     _shader.setUniform("model_mat", newModel);
     _shader.setUniform("normal_mat", mat3(transpose(inverse(newModel))));
-    planet0->draw(_shader);
+    earth->draw(_shader);
 
     translation = translate(mat4(1.0), saturnPositions);
     newModel = translation * model;
