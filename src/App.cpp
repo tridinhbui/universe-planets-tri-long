@@ -128,15 +128,11 @@ void App::onCursorMove(const VRCursorEvent &event) {
     
     if (mouseDown){
         vec2 dxy = vec2(event.getPos()[0], event.getPos()[1]) - lastMousePos;
-        // TODO: Update the "rotation" matrix based on how the user has dragged the mouse
-        // Note: the mouse movement since the last frame is stored in dxy.
 
         if (length(dxy) != 0) {
             float scalingAngleVariable = 1 / 180.0f;
-            float resultAngle = length(dxy) * scalingAngleVariable;
-            vec2 perpendicularVec = vec2(dxy.y, dxy.x);
+            vec2 perpendicularVec = vec2(dxy.y/2.0f, dxy.x/2.0f);
             vec3 vectorAxis = vec3(perpendicularVec.x, perpendicularVec.y, 0);
-            // rotation = toMat4(angleAxis(radians(45.0f / 360.0f), vectorAxis)) * rotation;
             rotation = toMat4(angleAxis(radians(45.0f/360.0f), vectorAxis)) * rotation;
         }
         
@@ -187,6 +183,7 @@ void App::onRenderGraphicsContext(const VRGraphicsState &renderState) {
         
         // Create planet objects
         sun.reset(new Planet(0.0f, 0.0f, 0.0f, 2.0f, "sun"));
+        planet0.reset(new Planet(0.0f, 0.0f, 0.0f, 2.0f, "earth"));
         mercury.reset(new Planet(1.158f, 0.0f, -0.2f, 0.2f, "mercury"));
         venus.reset(new Planet(2.164f, 0.0f, -0.4f, 0.5f, "venus"));
         earth.reset(new Planet(2.992f, 0.0f, -0.6f, 0.6f, "earth"));
@@ -197,21 +194,28 @@ void App::onRenderGraphicsContext(const VRGraphicsState &renderState) {
         uranus.reset(new Planet(57.34f, 0.0f, -1.4f, 1.1f, "uranus"));
         neptune.reset(new Planet(90.3f, 0.0f, -1.6f, 1.2f, "neptune"));
         pluto.reset(new Planet(118.13f, 0.0f, -1.8f, 0.2f, "pluto"));
-
-
-        
- 
     }
     
     // Advance the current time and loop back to the start if time is past the last earthquake
     float rdt = _curFrameTime - _lastTime;
     currentTime += playbackScale * rdt;
-    if (currentTime > eqd.getByIndex(eqd.getMaxIndex()).getDate().asSeconds()) {
-        currentTime = eqd.getByIndex(eqd.getMinIndex()).getDate().asSeconds();
-    }
-    if (currentTime < eqd.getByIndex(eqd.getMinIndex()).getDate().asSeconds()) {
-        currentTime = eqd.getByIndex(eqd.getMaxIndex()).getDate().asSeconds();
-    }
+    std::cout << "current time: \n\t" << currentTime << std::endl;
+
+    // update info for planets moving
+    earthPositions = updateEarthPositions(currentTime);
+    std::cout << "earth x: \n\t" << earthPositions.x << std::endl;
+    std::cout << "y: \n\t" << earthPositions.y << std::endl;
+    std::cout << "z: \n\t" << earthPositions.z << std::endl;
+    
+}
+
+vec3 App::updateEarthPositions(float currentTime) {
+    const float earthOrbitRadius = 8.96f;
+    const float earthOrbitPeriod = 365.25f;
+    float earthOrbitAngle = glm::radians(360.0f * (currentTime / (earthOrbitPeriod * 86400.0f)));
+
+    glm::vec3 earthPosition = glm::vec3(earthOrbitRadius * cos(earthOrbitAngle), 0, earthOrbitRadius * sin(earthOrbitAngle));
+    return earthPosition;
 }
 
 void App::onRenderGraphicsScene(const VRGraphicsState &renderState) {
@@ -243,21 +247,27 @@ void App::onRenderGraphicsScene(const VRGraphicsState &renderState) {
 	_shader.setUniform("eye_world", eye_world);
     
     
-    // Draw the earth
-    // earth->draw(_shader);
+    // Draw the planets
     
-    // sun->draw(_shader);
     sun->draw(_shader);
-    earth->draw(_shader);
-    saturn->draw(_shader);
-    venus->draw(_shader);
-    mercury->draw(_shader);
-    moon->draw(_shader);
-    mars->draw(_shader);
-    jupiter->draw(_shader);
-    uranus->draw(_shader);
-    neptune->draw(_shader);
-    pluto->draw(_shader);
+
+    
+    mat4 translation = translate(mat4(1.0), earthPositions);
+    mat4 newModel = translation * model;
+    _shader.setUniform("model_mat", newModel);
+    _shader.setUniform("normal_mat", mat3(transpose(inverse(newModel))));
+    planet0->draw(_shader);
+    
+    // earth->draw(_shader);
+    // saturn->draw(_shader);
+    // venus->draw(_shader);
+    // mercury->draw(_shader);
+    // moon->draw(_shader);
+    // mars->draw(_shader);
+    // jupiter->draw(_shader);
+    // uranus->draw(_shader);
+    // neptune->draw(_shader);
+    // pluto->draw(_shader);
         
     }
     

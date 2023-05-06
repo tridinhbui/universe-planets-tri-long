@@ -77,6 +77,7 @@ private:
 
 
     // Object representing the planet0
+    std::shared_ptr<Planet> planet0;
     std::shared_ptr<Planet> saturn;
     std::shared_ptr<Planet> sun;
     std::shared_ptr<Planet> earth;
@@ -88,6 +89,8 @@ private:
     std::shared_ptr<Planet> uranus;
     std::shared_ptr<Planet> neptune;
     std::shared_ptr<Planet> pluto;
+
+    vec3 earthPositions;
     
     // Rotation matrix for the earth and displayed earthquakes
     glm::mat4 rotation;
@@ -99,6 +102,8 @@ private:
     void drawText(const std::string text, float xPos, float yPos, GLfloat windowHeight, GLfloat windowWidth);
     struct FONScontext *fs;
     basicgraphics::GLSLProgram _textShader;
+
+    vec3 updateEarthPositions(float currentTime);
 };
 
 #endif // APP_H
