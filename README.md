@@ -34,7 +34,6 @@ To run the code, you will need to adjust the config file by commenting out all t
 updatePlanetPositions Method
 Here is our implementation of the updatePlanetPositions method that uses the Runge-Kutta method to simulate the planets' movement in the Solar System:
 
-
 glm::vec3 acceleration(glm::vec3 position) {
     glm::vec3 sunPosition(0.0f, 0.0f, 0.0f);
     float G = 6.6743e-11f; // gravitational constant
@@ -53,4 +52,25 @@ glm::vec3 updatePlanetPositions(float currentTime, float distance, float period)
 
     // Define the initial position and velocity
     glm::vec3 position(distance, 0.0f, 0.0f);
-    glm::vec3 velocity(0.0f
+    glm::vec3 velocity(0.0f, 0.0f, 0.0f);
+
+    // Update the position and velocity for each time step
+    for (int i = 0; i < numSteps; ++i) {
+        // Calculate the four sets of intermediate values
+        glm::vec3 k1v = h * acceleration(position);
+        glm::vec3 k1r = h * velocity;
+        glm::vec3 k2v = h * acceleration(position + k1r / 2.0f);
+        glm::vec3 k2r = h * (velocity + k1v / 2.0f);
+        glm::vec3 k3v = h * acceleration(position + k2r / 2.0f);
+        glm::vec3 k3r = h * (velocity + k2v / 2.0f);
+        glm::vec3 k4v = h * acceleration(position + k3r);
+        glm::vec3 k4r = h * (velocity + k3v);
+
+        // Update the position and velocity
+        position += (k1r + 2.0f * k2r + 2.0f * k3r + k4r) / 6.0f;
+        velocity += (k1v + 2.0f * k2v + 2.0f * k3v + k4v) / 6.0f;
+    }
+
+    // Return the updated position
+    return position;
+}
