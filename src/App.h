@@ -75,7 +75,6 @@ private:
 
     // Object representing the earth
 
-
     // Object representing the planet0
     std::shared_ptr<Planet> planet0;
     std::shared_ptr<Planet> saturn;
@@ -93,8 +92,14 @@ private:
     vec3 earthPositions;
     vec3 mercuryPositions;
     vec3 venusPositions;
+    vec3 moonPositions;
     vec3 marsPositions;
-    
+    vec3 jupiterPositions;
+    vec3 saturnPositions;
+    vec3 uranusPositions;
+    vec3 neptunePositions;
+    vec3 plutoPositions;
+
     // Rotation matrix for the earth and displayed earthquakes
     glm::mat4 rotation;
 
