@@ -84,7 +84,7 @@ void App::onButtonDown(const VRButtonEvent &event) {
     
     string name = event.getName();
     
-    // Speedup or slowdown the playback
+   
     if (name == "KbdLeft_Down") {
         look_at = look_at + vec3(-0.5,0,0);
     }
@@ -131,9 +131,9 @@ void App::onCursorMove(const VRCursorEvent &event) {
 
         if (length(dxy) != 0) {
             float scalingAngleVariable = 1 / 180.0f;
-            vec2 perpendicularVec = vec2(dxy.y/2.0f, dxy.x/2.0f);
-            vec3 vectorAxis = vec3(perpendicularVec.x, perpendicularVec.y, 0);
-            rotation = toMat4(angleAxis(radians(45.0f/360.0f), vectorAxis)) * rotation;
+            // rotation = toMat4(angleAxis(radians(45.0f/360.0f), vectorAxis)) * rotation;
+
+            eye_world = eye_world + vec3(0, dxy.y * 0.2f, 0);
         }
         
         
@@ -202,20 +202,25 @@ void App::onRenderGraphicsContext(const VRGraphicsState &renderState) {
     std::cout << "current time: \n\t" << currentTime << std::endl;
 
     // update info for planets moving
-    earthPositions = updateEarthPositions(currentTime);
-    std::cout << "earth x: \n\t" << earthPositions.x << std::endl;
-    std::cout << "y: \n\t" << earthPositions.y << std::endl;
-    std::cout << "z: \n\t" << earthPositions.z << std::endl;
+    earthPositions = updatePlanetPositions(currentTime, 8.96f, 365.0f);
+
+    // Mercury
+    mercuryPositions = updatePlanetPositions(currentTime, 3.87f, 87.97f);
+
+    // Venus
+    venusPositions = updatePlanetPositions(currentTime, 7.24f, 224.7f);
+
+    // Mars
+    marsPositions = updatePlanetPositions(currentTime, 15.0f, 687.0f);
+    
     
 }
 
-vec3 App::updateEarthPositions(float currentTime) {
-    const float earthOrbitRadius = 8.96f;
-    const float earthOrbitPeriod = 365.25f;
-    float earthOrbitAngle = glm::radians(360.0f * (currentTime / (earthOrbitPeriod * 86400.0f)));
+vec3 App::updatePlanetPositions(float currentTime, float orbitRadius, float orbitPeriod) {
+    float orbitAngle = glm::radians(360.0f * (currentTime / (orbitPeriod * 86400.0f)));
 
-    glm::vec3 earthPosition = glm::vec3(earthOrbitRadius * cos(earthOrbitAngle), 0, earthOrbitRadius * sin(earthOrbitAngle));
-    return earthPosition;
+    glm::vec3 positions = glm::vec3(orbitRadius * cos(orbitAngle), 0, orbitRadius * sin(orbitAngle));
+    return positions;
 }
 
 void App::onRenderGraphicsScene(const VRGraphicsState &renderState) {
@@ -234,7 +239,7 @@ void App::onRenderGraphicsScene(const VRGraphicsState &renderState) {
 	glm::mat4 projection = glm::perspective(glm::radians(45.0f), windowWidth / windowHeight, 0.01f, 100.0f);
 	
 	// Setup the model matrix
-	glm::mat4 model = rotation;
+	glm::mat4 model = mat4(1.0);
     
 	// Tell opengl we want to use this specific shader.
 	_shader.use();
@@ -260,10 +265,23 @@ void App::onRenderGraphicsScene(const VRGraphicsState &renderState) {
     
     // earth->draw(_shader);
     // saturn->draw(_shader);
-    // venus->draw(_shader);
-    // mercury->draw(_shader);
+    translation = translate(mat4(1.0), venusPositions);
+    newModel = translation * model;
+    _shader.setUniform("model_mat", newModel);
+    _shader.setUniform("normal_mat", mat3(transpose(inverse(newModel))));
+    venus->draw(_shader);
+
+    translation = translate(mat4(1.0), mercuryPositions);
+    newModel = translation * model;
+    _shader.setUniform("model_mat", newModel);
+    _shader.setUniform("normal_mat", mat3(transpose(inverse(newModel))));
+    mercury->draw(_shader);
     // moon->draw(_shader);
-    // mars->draw(_shader);
+    translation = translate(mat4(1.0), marsPositions);
+    newModel = translation * model;
+    _shader.setUniform("model_mat", newModel);
+    _shader.setUniform("normal_mat", mat3(transpose(inverse(newModel))));
+    mars->draw(_shader);
     // jupiter->draw(_shader);
     // uranus->draw(_shader);
     // neptune->draw(_shader);

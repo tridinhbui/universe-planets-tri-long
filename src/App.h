@@ -91,6 +91,9 @@ private:
     std::shared_ptr<Planet> pluto;
 
     vec3 earthPositions;
+    vec3 mercuryPositions;
+    vec3 venusPositions;
+    vec3 marsPositions;
     
     // Rotation matrix for the earth and displayed earthquakes
     glm::mat4 rotation;
@@ -103,7 +106,7 @@ private:
     struct FONScontext *fs;
     basicgraphics::GLSLProgram _textShader;
 
-    vec3 updateEarthPositions(float currentTime);
+    vec3 updatePlanetPositions(float currentTime, float orbitRadius, float orbitPeriod);
 };
 
 #endif // APP_H
