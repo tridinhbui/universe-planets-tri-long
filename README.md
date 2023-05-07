@@ -6,6 +6,7 @@ We, Tri and Long, are rendering the Solar System with the tools we have learned 
 1. [Task ](#task)
 2. [Update](#update)
 3. [Run code](#runcode)
+4. [updatePosition method](#updatePlanetPositionsMethod)
 
 ## Task
 In this project, we are using the tools we have learned in Comp465: Computer Graphics to render the Solar System.
@@ -41,6 +42,7 @@ To accomplish this, we have adjusted the values for the planets' positions using
 ## Run Code
 To run the code, you will need to adjust the config file by commenting out all the Windows-related configurations. This is because the code is currently configured for Windows, and commenting out these configurations will allow the code to run on other platforms. Once you have made the necessary adjustments, you should be able to run the program without any issues.
 
+<a name="updatePlanetPositionsMethod"></a>
 ## updatePlanetPositions Method
 Here is our implementation of the updatePlanetPositions method that uses the Runge-Kutta method to simulate the planets' movement in the Solar System:
 
